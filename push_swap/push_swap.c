@@ -6,7 +6,7 @@
 /*   By: ycakmakc <ycakmakc@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 21:49:32 by ycakmakc          #+#    #+#             */
-/*   Updated: 2025/10/26 18:47:05 by ycakmakc         ###   ########.fr       */
+/*   Updated: 2025/11/01 18:03:49 by ycakmakc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,12 @@ static int	*sort_and_return(char **tmp)
 {
 	t_stack	*a;
 	t_stack	*b;
-	int		a_len;
 	int		*result;
 
 	a = NULL;
 	b = NULL;
 	a = stack_init(tmp);
 	free_split(tmp);
-	a_len = stack_len(a);
 	choose_stralegy(&a, &b);
 	result = array_init(a);
 	if (!result)
@@ -56,9 +54,4 @@ int	*push_swap(int argc, char **argv)
 	}
 	result = sort_and_return(tmp);
 	return (result);
-}
-
-int	main(int argc, char **argv)
-{
-	push_swap(argc, argv);
 }

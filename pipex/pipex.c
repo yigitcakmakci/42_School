@@ -6,11 +6,13 @@
 /*   By: ycakmakc <ycakmakc@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 10:45:49 by ycakmakc          #+#    #+#             */
-/*   Updated: 2025/11/01 18:52:29 by ycakmakc         ###   ########.fr       */
+/*   Updated: 2025/11/03 02:54:44 by ycakmakc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "pipex.h"
 #include <fcntl.h>
+#include <stdio.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
@@ -19,14 +21,28 @@ static void	parent_process(char **argv, char **envp, int *fd)
 {
 	int	output_fd;
 
-	dup2(fd[0], STDIN_FILENO);
-	output_fd = open(argv[4], O_RDWR | O_CREAT | O_TRUNC, 0777);
-	dup2(output_fd, STDOUT_FILENO);
+	if (dup2(fd[0], STDIN_FILENO) == -1)
+	{
+		perror("pipex: dup2 output");
+		exit(1);
+	}
+	output_fd = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (output_fd == -1)
+	{
+		perror("pipex: output file");
+		exit(1);
+	}
+	if (dup2(output_fd, STDOUT_FILENO) == -1)
+	{
+		perror("pipex: dup2 input");
+		exit(1);
+	}
 	close(output_fd);
 	close(fd[0]);
 	close(fd[1]);
 	executes(argv, envp, 0);
 }
+
 static void	child_process(char **argv, char **envp, int *fd)
 {
 	int	input_fd;
@@ -37,9 +53,9 @@ static void	child_process(char **argv, char **envp, int *fd)
 		exit(1);
 	}
 	input_fd = open(argv[1], O_RDONLY);
-	if ((input_fd = open(argv[1], O_RDONLY, 0777)) == -1)
+	if (input_fd == -1)
 	{
-		perror("pipex: output file");
+		perror("pipex: input file");
 		exit(1);
 	}
 	if (dup2(input_fd, STDIN_FILENO) == -1)
@@ -53,25 +69,44 @@ static void	child_process(char **argv, char **envp, int *fd)
 	executes(argv, envp, 1);
 }
 
-int	main(int argc, char **argv, char **envp)
+static void	run_pipeline(char **argv, char **envp, int *fd)
 {
-	pid_t pid;
-	int fd[2];
+	pid_t	pid;
+	pid_t	pid2;
 
-	if (argc != 5)
-	{
-		write(1, "WROGN ARGUMENT!\n", 16);
-		return (0);
-	}
-	pipe(fd);
 	pid = fork();
 	if (pid == -1)
-		write(1, "ERROR\n", 7);
+	{
+		perror("pipex: fork1");
+		exit(1);
+	}
 	if (pid == 0)
 		child_process(argv, envp, fd);
-	else
+	pid2 = fork();
+	if (pid2 == -1)
 	{
-		waitpid(pid, NULL, 0);
-		parent_process(argv, envp, fd);
+		perror("pipex: fork2");
+		exit(1);
 	}
+	if (pid2 == 0)
+		parent_process(argv, envp, fd);
+	close(fd[0]);
+	close(fd[1]);
+	waitpid(pid, NULL, 0);
+	waitpid(pid2, NULL, 0);
+}
+
+int	main(int argc, char **argv, char **envp)
+{
+	int	fd[2];
+
+	if (argc != 5)
+		return (0);
+	if (pipe(fd) == -1)
+	{
+		perror("pipex: pipe");
+		exit(1);
+	}
+	run_pipeline(argv, envp, fd);
+	return (0);
 }

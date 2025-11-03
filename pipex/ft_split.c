@@ -6,7 +6,7 @@
 /*   By: ycakmakc <ycakmakc@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 17:20:33 by ycakmakc          #+#    #+#             */
-/*   Updated: 2025/07/10 18:34:55 by ycakmakc         ###   ########.fr       */
+/*   Updated: 2025/11/01 19:49:25 by ycakmakc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static char	**splt(char const *s, char c, char **splt)
 	return (splt);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char const c)
 {
 	char			**result;
 	int				w_count;

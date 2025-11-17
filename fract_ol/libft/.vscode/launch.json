@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/ycakmakc/42_School/pipex",
-      "program": "/home/ycakmakc/42_School/pipex/build/Debug/outDebug",
+      "cwd": "/home/ycakmakc/42_School/libft",
+      "program": "/home/ycakmakc/42_School/libft/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

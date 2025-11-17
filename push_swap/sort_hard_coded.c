@@ -6,7 +6,7 @@
 /*   By: ycakmakc <ycakmakc@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 19:53:41 by ycakmakc          #+#    #+#             */
-/*   Updated: 2025/10/17 15:31:59 by ycakmakc         ###   ########.fr       */
+/*   Updated: 2025/11/07 11:40:16 by ycakmakc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,5 @@ void	sort_hard_coded(t_stack **a)
 		i++;
 	}
 	sorting(x, a);
+	free(x);
 }

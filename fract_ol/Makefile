@@ -1,6 +1,6 @@
 NAME = fract_ol
 
-SRC = fract_ol.c fract_ol_utils.c fract_ol_events.c ft_strnstr.c ft_atof.c main.c
+SRC = fract_ol.c fract_ol_utils.c fract_ol_events.c ft_strncmp.c ft_atof.c main.c
 
 OBJ = $(SRC:.c=.o)
 

@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ycakmakc <ycakmakc@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/25 01:11:53 by ycakmakc          #+#    #+#             */
-/*   Updated: 2025/11/25 12:18:56 by ycakmakc         ###   ########.fr       */
+/*   Created: 2025/06/24 22:43:42 by ycakmakc          #+#    #+#             */
+/*   Updated: 2025/07/10 18:20:46 by ycakmakc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strnstr(const char *big, const char *little, int len)
-{
-	int	i;
-	int	j;
+#include <stddef.h>
 
-	if (*little == '\0')
-		return ((char *)big);
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t	i;
+
 	i = 0;
-	while (big[i] && i < len)
+	if (n == 0)
+		return (0);
+	while (i < n && s1[i] == s2[i])
 	{
-		j = 0;
-		while (big[i + j] && little[j]
-			&& i + j < len && big[i + j] == little[j])
-		{
-			j++;
-		}
-		if (!little[j])
-			return ((char *)&big[i]);
+		if (s1[i] == '\0')
+			return (0);
 		i++;
 	}
-	return (((void *)0));
+	if (i == n)
+		return (0);
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

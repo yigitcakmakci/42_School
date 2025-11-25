@@ -1,55 +1,87 @@
-#include "fract_ol.h"
-#include <stdio.h>
-#include <stdlib.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ycakmakc <ycakmakc@student.42kocaeli.co    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/25 17:04:13 by ycakmakc          #+#    #+#             */
+/*   Updated: 2025/11/25 17:57:34 by ycakmakc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int is_number(char *str)
+#include "fract_ol.h"
+#include <stdlib.h>
+#include <unistd.h>
+
+void	print_error_and_exit(void)
 {
-	int i = 0;
-	while (str[i] == ' ')
+	char	*msg;
+
+	msg = "Error: Invalid arguments.\n"
+		"Usage:\n"
+		"  ./fractol MANDELBROT\n"
+		"  ./fractol JULIA <real> <imaginary>\n"
+		"  Example: ./fractol JULIA -0.8 0.156\n";
+	write(2, msg, 115);
+	exit(1);
+}
+
+int	it_valid_number(char *str)
+{
+	int	i;
+	int	dot_count;
+
+	i = 0;
+	dot_count = 0;
+	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
 		i++;
 	if (str[i] == '+' || str[i] == '-')
 		i++;
-	while (str[i] != '\0')
+	if (!str[i])
+		return (0);
+	while (str[i])
 	{
-		if (!(str[i] <= '9' && str[i] >= '0') && !(str[i] == '.'))
+		if (str[i] == '.')
+			dot_count++;
+		else if (str[i] < '0' || str[i] > '9')
 			return (0);
-		else
-			i++;
+		if (dot_count > 1)
+			return (0);
+		i++;
 	}
 	return (1);
 }
 
-int main(int argc, char **argv)
+void	handle_args(int argc, char **argv)
 {
-	s_fract_julia	*fract_julia;
-	if (argc == 1)
+	t_fract_julia	*fract_julia;
+
+	if (argc == 2 && !ft_strncmp(argv[1], "MANDELBROT", 11))
 	{
-		perror("Error: Missing argument!\nUsage:\n./fractol MANDELBROT\n./fractol JULIA <real> <imaginary> (Ex: ./fractol JULIA -0.8 0.156)");
-		return (0);
+		fract_ol(NULL);
 	}
-	
-	if (ft_strnstr(argv[1], "MANDELBROT", 11))
+	else if (argc == 4 && !ft_strncmp(argv[1], "JULIA", 6))
 	{
-		fract_julia = NULL;
+		if (!it_valid_number(argv[2]) || !it_valid_number(argv[3]))
+			print_error_and_exit();
+		fract_julia = malloc(sizeof(t_fract_julia));
+		if (!fract_julia)
+			print_error_and_exit();
+		fract_julia->julia_x = ft_atof(argv[2]);
+		fract_julia->julia_y = ft_atof(argv[3]);
 		fract_ol(fract_julia);
-	}
-	else if(argc >= 4 && ft_strnstr(argv[1], "JULIA", 6))
-	{
-		if (is_number(argv[2]) && is_number(argv[3]))
-		{
-			fract_julia = malloc(sizeof(s_fract_julia));
-			fract_julia->julia_x = ft_atof(argv[2]);
-			fract_julia->julia_y = ft_atof(argv[3]);
-			fract_ol(fract_julia);
-		}
-		else
-		{
-			perror("Please input valid arg");
-		}
 	}
 	else
 	{
-		perror("invalid argument");
-		return (0);
+		print_error_and_exit();
 	}
+}
+
+int	main(int argc, char **argv)
+{
+	if (argc < 2)
+		print_error_and_exit();
+	handle_args(argc, argv);
+	return (0);
 }

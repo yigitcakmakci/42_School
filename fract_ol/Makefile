@@ -1,6 +1,6 @@
-NAME = fract_ol
+NAME = fractol
 
-SRC = fract_ol.c fract_ol_utils.c fract_ol_events.c ft_strncmp.c ft_atof.c main.c
+SRC = fractol.c fractol_utils.c fractol_events.c ft_strncmp.c ft_atof.c main.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -17,7 +17,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(LIBS) -o $(NAME)
 
-%.o: %.c fract_ol.h minilibx-linux/mlx.h
+%.o: %.c fractol.h minilibx-linux/mlx.h
 	$(CC) $(CFLAGS) -I$(MLX_DIR) -c $< -o $@
 
 clean:

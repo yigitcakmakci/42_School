@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fract_ol_events.c                                  :+:      :+:    :+:   */
+/*   fractol_events.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ycakmakc <ycakmakc@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 17:18:35 by ycakmakc          #+#    #+#             */
-/*   Updated: 2025/11/25 17:57:34 by ycakmakc         ###   ########.fr       */
+/*   Updated: 2025/11/25 18:35:25 by ycakmakc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minilibx-linux/mlx.h"
-#include "fract_ol.h"
+#include "fractol.h"
 #include <stdlib.h>
 
 #define KEY_ESC 65307
 #define MOUSE_SCROLL_UP 4
 #define MOUSE_SCROLL_DOWN 5
 
-int	close_handler(t_fract_ol *fract)
+int	close_handler(t_fractol *fract)
 {
 	if (fract->img_ptr)
 		mlx_destroy_image(fract->src_ptr, fract-> img_ptr);
@@ -35,7 +35,7 @@ int	close_handler(t_fract_ol *fract)
 	exit(0);
 }
 
-int	key_handler(int keycode, t_fract_ol *fract)
+int	key_handler(int keycode, t_fractol *fract)
 {
 	if (keycode == KEY_ESC)
 	{
@@ -44,7 +44,7 @@ int	key_handler(int keycode, t_fract_ol *fract)
 	return (0);
 }
 
-t_zoom	assign_t_zoom(int x, int y, double zoom_rate, t_fract_ol *fract)
+t_zoom	assign_t_zoom(int x, int y, double zoom_rate, t_fractol *fract)
 {
 	t_zoom	z;
 
@@ -59,7 +59,7 @@ t_zoom	assign_t_zoom(int x, int y, double zoom_rate, t_fract_ol *fract)
 	return (z);
 }
 
-int	mouse_handler(int keycode, int x, int y, t_fract_ol *fract)
+int	mouse_handler(int keycode, int x, int y, t_fractol *fract)
 {
 	double	zoom_rate;
 	t_zoom	z;

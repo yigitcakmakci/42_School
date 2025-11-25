@@ -6,11 +6,11 @@
 /*   By: ycakmakc <ycakmakc@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 17:04:13 by ycakmakc          #+#    #+#             */
-/*   Updated: 2025/11/25 17:57:34 by ycakmakc         ###   ########.fr       */
+/*   Updated: 2025/11/25 18:35:25 by ycakmakc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fract_ol.h"
+#include "fractol.h"
 #include <stdlib.h>
 #include <unistd.h>
 
@@ -27,7 +27,7 @@ void	print_error_and_exit(void)
 	exit(1);
 }
 
-int	it_valid_number(char *str)
+int	is_valid_number(char *str)
 {
 	int	i;
 	int	dot_count;
@@ -59,18 +59,18 @@ void	handle_args(int argc, char **argv)
 
 	if (argc == 2 && !ft_strncmp(argv[1], "MANDELBROT", 11))
 	{
-		fract_ol(NULL);
+		fractol(NULL);
 	}
 	else if (argc == 4 && !ft_strncmp(argv[1], "JULIA", 6))
 	{
-		if (!it_valid_number(argv[2]) || !it_valid_number(argv[3]))
+		if (!is_valid_number(argv[2]) || !is_valid_number(argv[3]))
 			print_error_and_exit();
 		fract_julia = malloc(sizeof(t_fract_julia));
 		if (!fract_julia)
 			print_error_and_exit();
 		fract_julia->julia_x = ft_atof(argv[2]);
 		fract_julia->julia_y = ft_atof(argv[3]);
-		fract_ol(fract_julia);
+		fractol(fract_julia);
 	}
 	else
 	{

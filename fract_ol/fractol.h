@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fract_ol.h                                         :+:      :+:    :+:   */
+/*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ycakmakc <ycakmakc@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 17:55:11 by ycakmakc          #+#    #+#             */
-/*   Updated: 2025/11/25 17:59:28 by ycakmakc         ###   ########.fr       */
+/*   Updated: 2025/11/25 18:35:31 by ycakmakc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRACT_OL_H
-# define FRACT_OL_H
+#ifndef fractol_H
+# define fractol_H
 # define MAX_ITERATION 30
 # define WIDTH 800
 # define HEIGHT 600
@@ -34,7 +34,7 @@ typedef struct s_fract_julia
 	double			julia_y;
 }					t_fract_julia;
 
-typedef struct s_fract_ol_limit
+typedef struct s_fractol_limit
 {
 	double			c_real;
 	double			c_imag;
@@ -44,7 +44,7 @@ typedef struct s_fract_ol_limit
 	double			max_i;
 }					t_fol;
 
-typedef struct s_fract_ol
+typedef struct s_fractol
 {
 	void			*src_ptr;
 	void			*win_ptr;
@@ -56,17 +56,17 @@ typedef struct s_fract_ol
 	t_fol			fol;
 	t_fract_julia	*julia;
 	t_zoom			event_ctrl;
-}					t_fract_ol;
+}					t_fractol;
 
-void				fract_ol(t_fract_julia *fract_julia);
-void				print_pixel(t_fract_ol *fract, int x, int y, int color);
-int					calculate_mandelbrot(t_fract_ol *fract, int x, int y);
-int					calculate_julia(t_fract_ol *fract, int x, int y);
-t_fract_ol			*get_mapping(t_fract_ol *fract, int x, int y);
+void				fractol(t_fract_julia *fract_julia);
+void				print_pixel(t_fractol *fract, int x, int y, int color);
+int					calculate_mandelbrot(t_fractol *fract, int x, int y);
+int					calculate_julia(t_fractol *fract, int x, int y);
+t_fractol			*get_mapping(t_fractol *fract, int x, int y);
 
-void				render_fractal(t_fract_ol *fract);
-int					key_handler(int keycode, t_fract_ol *fract);
-int					mouse_handler(int keycode, int x, int y, t_fract_ol *fract);
+void				render_fractal(t_fractol *fract);
+int					key_handler(int keycode, t_fractol *fract);
+int					mouse_handler(int keycode, int x, int y, t_fractol *fract);
 char				*ft_strncmp(const char *big, const char *little, int len);
 double				ft_atof(const char *str);
 

@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fract_ol_utils.c                                   :+:      :+:    :+:   */
+/*   fractol_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ycakmakc <ycakmakc@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 17:36:25 by ycakmakc          #+#    #+#             */
-/*   Updated: 2025/11/25 17:57:34 by ycakmakc         ###   ########.fr       */
+/*   Updated: 2025/11/25 18:35:25 by ycakmakc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fract_ol.h"
+#include "fractol.h"
 #include <stdlib.h>
 
-void	free_all(t_fract_ol *fract)
+void	free_all(t_fractol *fract)
 {
 	free(fract->julia);
 	free(fract);
 }
 
-t_fract_ol	*get_mapping(t_fract_ol *fract, int x, int y)
+t_fractol	*get_mapping(t_fractol *fract, int x, int y)
 {
 	double	range_r;
 	double	range_i;
@@ -31,7 +31,7 @@ t_fract_ol	*get_mapping(t_fract_ol *fract, int x, int y)
 	return (fract);
 }
 
-int	calculate_mandelbrot(t_fract_ol *fract, int x, int y)
+int	calculate_mandelbrot(t_fractol *fract, int x, int y)
 {
 	int		i;
 	double	z_real;
@@ -53,7 +53,7 @@ int	calculate_mandelbrot(t_fract_ol *fract, int x, int y)
 	return (i);
 }
 
-int	calculate_julia(t_fract_ol *fract, int x, int y)
+int	calculate_julia(t_fractol *fract, int x, int y)
 {
 	int		i;
 	double	z_real;
@@ -77,7 +77,7 @@ int	calculate_julia(t_fract_ol *fract, int x, int y)
 	return (i);
 }
 
-void	print_pixel(t_fract_ol *fract, int x, int y, int color)
+void	print_pixel(t_fractol *fract, int x, int y, int color)
 {
 	char	*dst;
 

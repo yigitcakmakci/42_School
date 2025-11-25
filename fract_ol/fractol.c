@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fract_ol.c                                         :+:      :+:    :+:   */
+/*   fractol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ycakmakc <ycakmakc@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 17:37:37 by ycakmakc          #+#    #+#             */
-/*   Updated: 2025/11/25 17:58:44 by ycakmakc         ###   ########.fr       */
+/*   Updated: 2025/11/25 18:35:25 by ycakmakc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fract_ol.h"
+#include "fractol.h"
 #include "minilibx-linux/mlx.h"
 #include <math.h>
 #include <stdio.h>
@@ -27,17 +27,17 @@ t_fol	init_fractal_data(void)
 	return (fol);
 }
 
-t_fract_ol	*create_scene(void)
+t_fractol	*create_scene(void)
 {
-	t_fract_ol	*fract;
+	t_fractol	*fract;
 
-	fract = malloc(sizeof(t_fract_ol));
+	fract = malloc(sizeof(t_fractol));
 	if (!fract)
 		return (NULL);
 	fract->src_ptr = mlx_init();
 	if (!fract->src_ptr)
 		return (perror("mlx_init failed"), free(fract), NULL);
-	fract->win_ptr = mlx_new_window(fract->src_ptr, WIDTH, HEIGHT, "FRACT_OL");
+	fract->win_ptr = mlx_new_window(fract->src_ptr, WIDTH, HEIGHT, "fractol");
 	if (!fract->win_ptr)
 		return (perror("mlx_win failed"), free(fract->src_ptr), free(fract),
 			NULL);
@@ -69,7 +69,7 @@ int	calculate_color(int iteration)
 	return (r << 16 | g << 8 | b);
 }
 
-void	render_fractal(t_fract_ol *fract)
+void	render_fractal(t_fractol *fract)
 {
 	int	iteration;
 	int	x;
@@ -96,9 +96,9 @@ void	render_fractal(t_fract_ol *fract)
 		0);
 }
 
-void	fract_ol(t_fract_julia *fract_julia)
+void	fractol(t_fract_julia *fract_julia)
 {
-	t_fract_ol	*fract;
+	t_fractol	*fract;
 
 	fract = create_scene();
 	if (fract == NULL)

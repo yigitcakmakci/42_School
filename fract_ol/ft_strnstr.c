@@ -1,48 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_chunk_based_utils.c                           :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ycakmakc <ycakmakc@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/24 10:36:09 by ycakmakc          #+#    #+#             */
-/*   Updated: 2025/11/20 11:59:25 by ycakmakc         ###   ########.fr       */
+/*   Created: 2025/06/25 01:11:53 by ycakmakc          #+#    #+#             */
+/*   Updated: 2025/11/25 12:18:56 by ycakmakc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap_lib.h"
-
-int	find_pos_b(t_stack *b, int max_index)
+char	*ft_strnstr(const char *big, const char *little, int len)
 {
-	int	pos;
+	int	i;
+	int	j;
 
-	pos = 0;
-	while (b)
+	if (*little == '\0')
+		return ((char *)big);
+	i = 0;
+	while (big[i] && i < len)
 	{
-		if (b->index == max_index)
-			return (pos);
-		pos++;
-		b = b->next;
-	}
-	return (-1);
-}
-
-void	move_stack_b(int pos, int len, t_stack **b)
-{
-	if (pos <= len / 2)
-	{
-		while (pos > 0)
+		j = 0;
+		while (big[i + j] && little[j]
+			&& i + j < len && big[i + j] == little[j])
 		{
-			rb(b);
-			pos--;
+			j++;
 		}
+		if (!little[j])
+			return ((char *)&big[i]);
+		i++;
 	}
-	else
-	{
-		while (pos < len)
-		{
-			rrb(b);
-			pos++;
-		}
-	}
+	return (((void *)0));
 }

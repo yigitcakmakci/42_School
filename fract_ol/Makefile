@@ -1,51 +1,30 @@
-# Programın adı
 NAME = fract_ol
 
-# Sadece senin .c dosyaların
-SRC = main.c
-OBJS = $(SRC:.c=.o)
+SRC = fract_ol.c fract_ol_utils.c fract_ol_events.c ft_strnstr.c ft_atoi.c main.c
 
-# Kütüphane yolları (KLASÖR yolları)
-LIBFT_DIR = ./libft
-MLX_DIR = ./minilibx-linux
+OBJ = $(SRC:.c=.o)
 
-# Libft.a'nın tam yolu
-LIBFT_A = $(LIBFT_DIR)/libft.a
+MLX_DIR = minilibx-linux
+
+LIBS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 
 CC = cc
+
 CFLAGS = -Wall -Wextra -Werror
 
-# .h dosyalarının aranacağı KLASÖRLER
-INCLUDES = -I./includes -I$(LIBFT_DIR) -I$(MLX_DIR)
-
-# .a dosyalarının aranacağı KLASÖRLER
-LIBS = -L$(LIBFT_DIR) -lft \
-       -L$(MLX_DIR) -lmlx \
-       -lXext -lX11 -lm
-
-# Ana kural
 all: $(NAME)
 
-# $(NAME), $(LIBFT_A) ve $(OBJS)'e bağımlı
-$(NAME): $(LIBFT_A) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(INCLUDES) -o $(NAME)
+$(NAME): $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBS) -o $(NAME)
 
-# libft.a'yı derleme kuralı
-$(LIBFT_A):
-	make -C $(LIBFT_DIR)
+%.o: %.c fract_ol.h minilibx-linux/mlx.h
+	$(CC) $(CFLAGS) -I$(MLX_DIR) -c $< -o $@
 
-# .o dosyalarını derleme kuralı
-%.o: %.c
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-
-# Temizleme kuralları
 clean:
-	rm -f $(OBJS)
-	make clean -C $(LIBFT_DIR)
+	rm -f $(OBJ)
 
 fclean: clean
 	rm -f $(NAME)
-	make fclean -C $(LIBFT_DIR)
 
 re: fclean all
 

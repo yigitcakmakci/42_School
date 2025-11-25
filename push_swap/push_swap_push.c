@@ -6,12 +6,11 @@
 /*   By: ycakmakc <ycakmakc@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 13:01:19 by ycakmakc          #+#    #+#             */
-/*   Updated: 2025/10/26 18:59:35 by ycakmakc         ###   ########.fr       */
+/*   Updated: 2025/11/17 12:58:14 by ycakmakc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap_lib.h"
-#include <stdio.h>
 #include <unistd.h>
 
 static void	push_swap_push(t_stack **from, t_stack **to)

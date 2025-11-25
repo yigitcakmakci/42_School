@@ -6,7 +6,7 @@
 /*   By: ycakmakc <ycakmakc@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 10:45:49 by ycakmakc          #+#    #+#             */
-/*   Updated: 2025/11/03 02:54:44 by ycakmakc         ###   ########.fr       */
+/*   Updated: 2025/11/17 16:11:24 by ycakmakc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static void	run_pipeline(char **argv, char **envp, int *fd)
 	pid_t	pid;
 	pid_t	pid2;
 
-	pid = fork();
+	pid = fork(); //2
 	if (pid == -1)
 	{
 		perror("pipex: fork1");

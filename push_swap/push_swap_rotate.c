@@ -6,13 +6,12 @@
 /*   By: ycakmakc <ycakmakc@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 13:01:14 by ycakmakc          #+#    #+#             */
-/*   Updated: 2025/10/26 19:00:14 by ycakmakc         ###   ########.fr       */
+/*   Updated: 2025/11/17 12:58:12 by ycakmakc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap_lib.h"
 #include <unistd.h>
-#include <stdio.h>
 
 static void	push_swap_rotate(t_stack **rotate)
 {

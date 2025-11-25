@@ -6,12 +6,11 @@
 /*   By: ycakmakc <ycakmakc@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 18:16:44 by ycakmakc          #+#    #+#             */
-/*   Updated: 2025/10/07 18:48:00 by ycakmakc         ###   ########.fr       */
+/*   Updated: 2025/11/17 12:58:13 by ycakmakc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap_lib.h"
-#include <stdio.h>
 #include <stdlib.h>
 
 void	ft_lstclear(t_stack *lst)

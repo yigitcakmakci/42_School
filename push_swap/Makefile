@@ -10,7 +10,6 @@ all: $(NAME)
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-OUT = push_swap
 
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)

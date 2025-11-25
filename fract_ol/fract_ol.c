@@ -67,7 +67,10 @@ void render_fractal(s_fract_ol *fract)
 		x = 0;
 		while (x < WIDTH)
 		{
-			iteration = calculate_mandelbrot(fract, x, y);
+			if (fract->julia != NULL)
+				iteration = calculate_julia(fract, x, y);
+			else
+				iteration = calculate_mandelbrot(fract, x, y);
 			color = calculate_color(iteration);
 			print_pixel(fract, x, y, color);
 			x++;
@@ -77,11 +80,12 @@ void render_fractal(s_fract_ol *fract)
 	mlx_put_image_to_window(fract-> src_ptr, fract-> win_ptr, fract ->img_ptr, 0, 0);
 }
 
-void	fract_ol(s_fract_julia fract_julia)
+void	fract_ol(s_fract_julia *fract_julia)
 {
 	s_fract_ol *fract;
 	if ((fract = create_scene()) == NULL)
 		return ;
+	fract-> julia = fract_julia;
 	render_fractal(fract);
 	mlx_key_hook(fract-> win_ptr, key_handler, fract);
 	mlx_mouse_hook(fract-> win_ptr, mouse_handler, fract);

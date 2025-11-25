@@ -6,11 +6,28 @@
 #define MOUSE_SCROLL_UP 4
 #define MOUSE_SCROLL_DOWN 5
 
-int	key_handler(int keycode)
+int	close_handler(s_fract_ol *fract)
+{
+	if (fract->img_ptr)
+		mlx_destroy_image(fract->src_ptr, fract-> img_ptr);
+	if (fract->win_ptr)
+		mlx_destroy_window(fract->src_ptr, fract-> win_ptr);
+	if (fract->src_ptr)
+	{
+		mlx_destroy_display(fract->src_ptr);
+		free(fract->src_ptr);
+	}
+	if (fract->julia)
+		free(fract->julia);
+	free(fract);
+	exit(0);
+}
+
+int	key_handler(int keycode, s_fract_ol *fract)
 {
 	if (keycode == KEY_ESC)
 	{
-		exit(0);
+		close_handler(fract);
 	}
 	return (0);
 }

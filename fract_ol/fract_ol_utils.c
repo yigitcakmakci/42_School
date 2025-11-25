@@ -1,4 +1,11 @@
 #include "fract_ol.h"
+#include <stdlib.h>
+
+void	free_all(s_fract_ol *fract)
+{
+	free(fract->julia);
+	free(fract);
+}
 
 s_fract_ol	*get_mapping(s_fract_ol *fract ,int x, int y)
 {
@@ -31,6 +38,28 @@ int	calculate_mandelbrot(s_fract_ol *fract ,int x, int y)
 	return (i);
 }
 
+int	calculate_julia(s_fract_ol *fract, int x, int y)
+{
+	int		i;
+	double	z_real;
+	double	z_imag;
+	double	z_real_temp;
+
+	fract->fol.c_real = fract->julia->julia_x;
+	fract->fol.c_imag = fract->julia->julia_y;
+
+	z_real = fract->fol.min_r + (x / (double)WIDTH) * (fract->fol.max_r - fract->fol.min_r);
+	z_imag = fract->fol.min_i + (y / (double)HEIGHT) * (fract->fol.max_i - fract->fol.min_i);
+	i = 0;
+	while ((z_real * z_real) + (z_imag * z_imag) <= 4.0 && i < MAX_ITERATION)
+	{
+		z_real_temp = z_real * z_real - z_imag * z_imag + fract->fol.c_real;
+		z_imag = 2.0 * z_real * z_imag + fract->fol.c_imag;
+		z_real = z_real_temp;
+		i++;
+	}
+	return (i);
+}
 
 void	print_pixel(s_fract_ol *fract, int x, int y, int color)
 {
